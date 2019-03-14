@@ -1,0 +1,26 @@
+{
+  "title": "BidiPass SDK Integration",
+  "children": {
+    "add-admin": {
+      "title": "Add an admin"
+    },
+    "add-provider": {
+      "title": "Add a Provider"
+    },
+    "connect-identity": {
+      "title": "Connect an Identity to a provider"
+    },
+    "2FA": {
+      "title": "2FA: Authorize Login"
+    },
+    "authorize-action": {
+      "title": "Authorize an Action"
+    },
+    "list-requests": {
+      "title": "List Authorization Requests"
+    },
+    "disconnect-identity": {
+      "title": "Disconnect an Identity from a provider"
+    }
+  }
+}

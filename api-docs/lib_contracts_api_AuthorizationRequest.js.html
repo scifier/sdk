@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: lib/contracts/api/AuthorizationRequest.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: lib/contracts/api/AuthorizationRequest.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>const BaseApi = require('./base-api');
+const OperationTimedOutError = require('./error/operation-timed-out-error');
+const AuthorizationFailedError = require('./error/authorization-failed-error');
+const debug = require('../../utils/debug')(__filename);
+
+class AuthorizationRequest extends BaseApi {
+  /**
+   * Dispatch authorization requet
+   * @param {number} timeout 
+   * @param {number} pollRate
+   */
+  async dispatch(
+    timeout = AuthorizationRequest.DEFAULT_TIMEOUT,
+    pollRate = AuthorizationRequest.DEFAULT_PULL_RATE
+  ) {
+    const state = await this.waitForState(
+      [
+        AuthorizationRequest.State.APPROVED,
+        AuthorizationRequest.State.REJECTED,
+        AuthorizationRequest.State.CANCELED,
+      ],
+      timeout,
+      pollRate
+    );
+
+    if (state === AuthorizationRequest.State.CANCELED) {
+      throw new AuthorizationFailedError(
+        AuthorizationRequest.State.CANCELED,
+        'Request was canceled'
+      );
+    } else if (state === AuthorizationRequest.State.REJECTED) {
+      throw new AuthorizationFailedError(
+        AuthorizationRequest.State.REJECTED,
+        'Request was rejected by identity'
+      );
+    }
+
+    return {
+      token: await this.otpCode(),
+      counter: await this.otpCounter(),
+    };
+  }
+
+  /**
+   * Wait for certain state[s]
+   * @param {number|Array} states 
+   * @param {number} timeout 
+   * @param {number} pollRate
+   */
+  async waitForState(
+    states,
+    timeout = AuthorizationRequest.DEFAULT_TIMEOUT,
+    pollRate = AuthorizationRequest.DEFAULT_PULL_RATE
+  ) {
+    const validateState = s => (Array.isArray(states) ? states : [ states ]).indexOf(s) !== -1;
+
+    return new Promise((resolve, reject) => {
+      const watcher = this.contract.ChangeState.watch({ pollRate });
+      const ttl = setTimeout(() => {
+        debug('authorization:event:timeout', timeout);
+
+        watcher.close();
+        reject(new OperationTimedOutError(
+          `The timeout of ${timeout}ms exceeded while waiting ` +
+          `for AuthorizationRequest states: ${ states.join(', ') }`
+        ));
+      }, timeout);
+
+      watcher.on('data', event => {
+        debug('authorization:event:data', event);
+        
+        if (validateState(event.args.newState)) {
+          clearTimeout(ttl);
+          watcher.close();
+          resolve(event.args.newState);
+        }
+      });
+
+      watcher.on('error', (error) => {
+        debug('authorization:event:error', error);
+
+        clearTimeout(ttl);
+        watcher.close();
+        reject(error);
+      });
+    });
+  }
+
+  /**
+   * Get stateReason value
+   */
+  async stateReason() {
+    return this.contract.stateReason();
+  }
+
+  /**
+   * Get state value
+   */
+  async state() {
+    return this.contract.state();
+  }
+
+  /**
+   * Get otpCode value
+   */
+  async otpCode() {
+    return this.cast.bytes32(await this.contract.otpCode());
+  }
+
+  /**
+   * Get otpCounter value
+   */
+  async otpCounter() {
+    return this.contract.otpCounter();
+  }
+
+  /**
+   * Get transaction operation type
+   */
+  async opType() {
+    return this.contract.opType();
+  }
+
+  /**
+   * Get transaction timestamp
+   */
+  async timestamp() {
+    return this.contract.timestamp();
+  }
+
+  /**
+   * Get transaction description
+   */
+  async description() {
+    return this.contract.description();
+  }
+
+  /**
+   * Get transaction symbol
+   */
+  async symbol() {
+    return this.cast.bytes32(await this.contract.symbol());
+  }
+
+  /**
+   * Get transaction amount
+   */
+  async amount() {
+    return this.contract.amount();
+  }
+
+  /**
+   * Get transaction denomination
+   */
+  async denomination() {
+    return this.contract.denomination();
+  }
+
+  /**
+   * Get transaction id
+   */
+  async id() {
+    return this.cast.bytes32(await this.contract.id());
+  }
+
+  /**
+   * Get transaction uid
+   */
+  async uid() {
+    return this.cast.bytes32(await this.contract.uid());
+  }
+
+  /**
+   * Accept authorization request
+   */
+  async accept(...args) {
+    return this.contract.accept(...args);
+  }
+
+  /**
+   * Decline authorization request
+   * @param {string} stateReason
+   */
+  async decline(stateReason, ...args) {
+    return this.contract.decline(stateReason, ...args);
+  }
+
+  /**
+   * Cancel authorization request
+   */
+  async cancel(...args) {
+    return this.contract.cancel(...args);
+  }
+
+  /**
+   * Approve authorization request
+   * @param {string} otpCode
+   */
+  async approve(otpCode, ...args) {
+    return this.contract.approve(this.cast.bytes32(otpCode), ...args);
+  }
+
+  /**
+   * Reject authorization request
+   */
+  async reject(...args) {
+    return this.contract.reject(...args);
+  }
+
+  /**
+   * @inheritdoc
+   */
+  get $asyncProperties() {
+    return [
+      'uid', 'id', 'denomination',
+      'amount', 'symbol', 'description',
+      'timestamp', 'opType', 'otpCounter',
+      'otpCode', 'state', 'stateReason',
+    ];
+  }
+
+  /**
+   * Operation types
+   */
+  static get OpType() {
+    return {
+      GENERIC: '0',
+      DEBIT: '1',
+      CREDIT: '2',
+    };
+  }
+
+  /**
+   * Request states
+   */
+  static get State() {
+    return {
+      PENDING: '0', // Send by platform
+      APPROVED: '1', // Approved by user
+      REJECTED: '2', // Rejected by user
+      CANCELED: '3', // Cancelled by platform
+      ACCEPTED: '4', // Accepted by platform
+      DECLINED: '5', // Declined by platform
+    };
+  }
+
+  /**
+   * Default pull rate
+   */
+  static get DEFAULT_PULL_RATE() {
+    return 500;
+  }
+
+  /**
+   * Default timeout
+   */
+  static get DEFAULT_TIMEOUT() {
+    return 120000;
+  }
+
+  /**
+   * @inheritdoc
+   */
+  static get contractName() {
+    return 'AuthorizationRequest';
+  }
+}
+
+module.exports = AuthorizationRequest;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Authorization.html">Authorization</a></li><li><a href="AuthorizationFailedError.html">AuthorizationFailedError</a></li><li><a href="BaseApi.html">BaseApi</a></li><li><a href="BaseNetwork.html">BaseNetwork</a></li><li><a href="BidiPass.html">BidiPass</a></li><li><a href="ClientNotSetError.html">ClientNotSetError</a></li><li><a href="Collection.html">Collection</a></li><li><a href="Connection.html">Connection</a></li><li><a href="Container.html">Container</a></li><li><a href="ContainerError.html">ContainerError</a></li><li><a href="Contract.html">Contract</a></li><li><a href="ContractApiError.html">ContractApiError</a></li><li><a href="CustomFields.html">CustomFields</a></li><li><a href="ExtensionError.html">ExtensionError</a></li><li><a href="Identity.html">Identity</a></li><li><a href="IdentityError.html">IdentityError</a></li><li><a href="Item.html">Item</a></li><li><a href="MissingApiError.html">MissingApiError</a></li><li><a href="MissingContractDeployAddressError.html">MissingContractDeployAddressError</a></li><li><a href="MissingContractError.html">MissingContractError</a></li><li><a href="MissingContractNameError.html">MissingContractNameError</a></li><li><a href="MissingExtensionError.html">MissingExtensionError</a></li><li><a href="MissingExtensionNameError.html">MissingExtensionNameError</a></li><li><a href="MissingKeyError.html">MissingKeyError</a></li><li><a href="NotAContractError.html">NotAContractError</a></li><li><a href="NotAnExtensionError.html">NotAnExtensionError</a></li><li><a href="OperationTimedOutError.html">OperationTimedOutError</a></li><li><a href="Repository.html">Repository</a></li><li><a href="RepositoryError.html">RepositoryError</a></li><li><a href="TruffleNetwork.html">TruffleNetwork</a></li><li><a href="Value.html">Value</a></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-index_.html">BidiPass SDK Integration</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Tue Feb 05 2019 14:44:07 GMT+0200 (EET)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+# https://docs.npmjs.com/misc/developers#keeping-files-out-of-your-package
+
+#tests
+test
+coverage
+
+#build
+bin
+
+#docs
+.jsdoc.js
+docs
+
+#editor settings
+.idea
+.editorconfig

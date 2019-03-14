@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: contracts/api/PlatformRegistry.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: contracts/api/PlatformRegistry.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>const Whitelist = require('./lib/whitelist');
+const RewardRegistry = require('./RewardRegistry');
+const Platform = require('./Platform');
+
+class PlatformRegistry extends Whitelist {
+  /**
+   * Reward registry contract
+   */
+  async rewardRegistry() {
+    return this.repository
+      .api(RewardRegistry.contractName)
+      .at(await this.contract.rewardRegistry());
+  }
+
+  /**
+   * Get platforms value
+   */
+  async platforms() {
+    return this.contract.platforms();
+  }
+
+  /**
+   * Get platform contract addess
+   * @param {string} platformId
+   */
+  async platform(platformId) {
+    return this.repository
+      .api(Platform.contractName)
+      .at(await this.contract.platform(this.cast.bytes32(platformId)));
+  }
+
+  /**
+   * Get name of the platform
+   * @param {string} platformId
+   */
+  async name(platformId) {
+    return this.contract.name(this.cast.bytes32(platformId));
+  }
+
+  /**
+   * Get description of the platform
+   * @param {string} platformId
+   */
+  async description(platformId) {
+    return this.contract.description(this.cast.bytes32(platformId));
+  }
+
+  /**
+   * Get website address of the platform
+   * @param {string} platformId
+   */
+  async website(platformId) {
+    return this.contract.website(this.cast.bytes32(platformId));
+  }
+
+  /**
+   * Get icon URL of the platform
+   * @param {string} platformId
+   */
+  async icon(platformId) {
+    return this.contract.icon(this.cast.bytes32(platformId));
+  }
+
+  /**
+   * Check if a platform exists
+   * @param {string} platformId
+   */
+  async exists(platformId) {
+    return this.contract.exists(this.cast.bytes32(platformId));
+  }
+
+  /**
+   * Create a new platform and add it to registry
+   * @param {number} rewardSize 
+   * @param {string} id 
+   * @param {string} name 
+   * @param {string} description 
+   * @param {string} website 
+   * @param {string} icon 
+   * @param {string} owner
+   */
+  async add(
+    rewardSize,
+    id,
+    name,
+    description,
+    website,
+    icon,
+    owner,
+    ...args
+  ) {
+    const tx = await this.contract.add(
+      rewardSize,
+      this.cast.bytes32(id),
+      name,
+      description,
+      website,
+      icon,
+      this.cast.address(owner),
+      ...args
+    );
+
+    const { args: { platformId } } = tx.findEvent('AddPlatform');
+
+    return this.platform(this.cast.bytes32(platformId));
+  }
+
+  /**
+   * Remove a platform from the registry
+   * @param {string} platformId 
+   */
+  async remove(platformId, ...args) {
+    return this.contract.remove(this.cast.bytes32(platformId), ...args);
+  }
+
+  /**
+   * @inheritdoc
+   */
+  static get contractName() {
+    return 'PlatformRegistry';
+  }
+}
+
+module.exports = PlatformRegistry;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="AuthorizationFailedError.html">AuthorizationFailedError</a></li><li><a href="BaseApi.html">BaseApi</a></li><li><a href="BaseNetwork.html">BaseNetwork</a></li><li><a href="BidiPass.html">BidiPass</a></li><li><a href="ClientNotSetError.html">ClientNotSetError</a></li><li><a href="Collection.html">Collection</a></li><li><a href="Connection.html">Connection</a></li><li><a href="Container.html">Container</a></li><li><a href="ContainerError.html">ContainerError</a></li><li><a href="Contract.html">Contract</a></li><li><a href="ContractApiError.html">ContractApiError</a></li><li><a href="ExtensionError.html">ExtensionError</a></li><li><a href="Identity.html">Identity</a></li><li><a href="IdentityError.html">IdentityError</a></li><li><a href="InvalidAuthorizationResponseError.html">InvalidAuthorizationResponseError</a></li><li><a href="Item.html">Item</a></li><li><a href="MissingApiError.html">MissingApiError</a></li><li><a href="MissingContractDeployAddressError.html">MissingContractDeployAddressError</a></li><li><a href="MissingContractError.html">MissingContractError</a></li><li><a href="MissingContractNameError.html">MissingContractNameError</a></li><li><a href="MissingExtensionError.html">MissingExtensionError</a></li><li><a href="MissingExtensionNameError.html">MissingExtensionNameError</a></li><li><a href="MissingKeyError.html">MissingKeyError</a></li><li><a href="NotAContractError.html">NotAContractError</a></li><li><a href="NotAnExtensionError.html">NotAnExtensionError</a></li><li><a href="OperationTimedOutError.html">OperationTimedOutError</a></li><li><a href="Repository.html">Repository</a></li><li><a href="RepositoryError.html">RepositoryError</a></li><li><a href="TruffleNetwork.html">TruffleNetwork</a></li><li><a href="Value.html">Value</a></li></ul><h3>Tutorials</h3><ul><li><a href="tutorial-2FA.html">2FA usecase (Login authorization)</a></li><li><a href="tutorial-add-admin.html">Add an admin</a></li><li><a href="tutorial-add-provider.html">Add a Provider</a></li><li><a href="tutorial-authorize-action.html">Authorize an Action</a></li><li><a href="tutorial-connect-identity.html">Connect an Identity to a Provider</a></li><li><a href="tutorial-index_.html">BidiPass SDK Documetation</a></li><li><a href="tutorial-list-requests.html">Authorize an Action</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Tue Nov 06 2018 11:35:32 GMT+0200 (EET)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

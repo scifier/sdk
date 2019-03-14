@@ -1,0 +1,56 @@
+{
+  "name": "@bidipass/sdk",
+  "version": "1.1.1",
+  "description": "BidiPass SDK",
+  "main": "bidipass-loader.js",
+  "bin": {
+    "bidipass": "cli/bidipass.js"
+  },
+  "scripts": {
+    "test": "BIDIPASS_ENV=development $(npm bin)/mocha test --timeout 99999 --ui tdd --slow 1500 --file test/_boot.js",
+    "prepack": "npm run init && npm run docs",
+    "init": "./bin/sync-blockchain.sh",
+    "init-dev": "./bin/redeploy-sync-blockchain.sh",
+    "docs": "$(npm bin)/jsdoc -c .jsdoc.js ./bidipass-loader.js"
+  },
+  "keywords": [
+    "BidiPass",
+    "sdk",
+    "auth",
+    "blockchain",
+    "bc"
+  ],
+  "author": "AlexanderC <alexander.cucer@titanium-soft.com>",
+  "license": "ISC",
+  "dependencies": {
+    "base64-stream": "1.0.0",
+    "chalk": "2.4.2",
+    "debug": "4.1.1",
+    "dotenv": "6.2.0",
+    "dotenv-parse-variables": "0.2.0",
+    "express-validator": "5.3.1",
+    "faker": "4.1.0",
+    "filter-object": "3.0.0",
+    "flex-contract": "github:AlexanderC/flex-contract",
+    "fs-extra": "7.0.1",
+    "http-server": "0.11.1",
+    "json-colorizer": "1.1.1",
+    "p-retry": "3.0.1",
+    "pify": "4.0.1",
+    "prompt-confirm": "2.0.4",
+    "qr-image": "3.2.0",
+    "sharp": "0.21.3",
+    "speakeasy": "2.0.0",
+    "stream-to-promise": "2.2.0",
+    "web3": "1.0.0-beta.43",
+    "web3-eth-abi": "1.0.0-beta.43",
+    "web3-utils": "1.0.0-beta.43",
+    "yargs": "12.0.5"
+  },
+  "devDependencies": {
+    "chai": "4.2.0",
+    "ink-docstrap": "1.3.2",
+    "jsdoc": "3.5.5",
+    "mocha": "5.2.0"
+  }
+}

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<title>Documentation Tutorial: Add an admin</title>
+
+	<!--[if lt IE 9]>
+	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link type="text/css" rel="stylesheet" href="styles/sunlight.default.css">
+
+	<link type="text/css" rel="stylesheet" href="styles/site.cosmo.css">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top ">
+<div class="container">
+	<div class="navbar-header">
+		<a class="navbar-brand" href="index.html">Documentation</a>
+		<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#topNavigation">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+        </button>
+	</div>
+	<div class="navbar-collapse collapse" id="topNavigation">
+		<ul class="nav navbar-nav">
+			
+			<li class="dropdown">
+				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="Authorization.html">Authorization</a></li><li><a href="AuthorizationFailedError.html">AuthorizationFailedError</a></li><li><a href="BaseApi.html">BaseApi</a></li><li><a href="BaseNetwork.html">BaseNetwork</a></li><li><a href="BidiPass.html">BidiPass</a></li><li><a href="BrandedQR.html">BrandedQR</a></li><li><a href="ClientNotSetError.html">ClientNotSetError</a></li><li><a href="Collection.html">Collection</a></li><li><a href="Connection.html">Connection</a></li><li><a href="Container.html">Container</a></li><li><a href="ContainerError.html">ContainerError</a></li><li><a href="Contract.html">Contract</a></li><li><a href="ContractApiError.html">ContractApiError</a></li><li><a href="CustomFields.html">CustomFields</a></li><li><a href="ExtensionError.html">ExtensionError</a></li><li><a href="Identity.html">Identity</a></li><li><a href="IdentityError.html">IdentityError</a></li><li><a href="Item.html">Item</a></li><li><a href="MissingApiError.html">MissingApiError</a></li><li><a href="MissingContractDeployAddressError.html">MissingContractDeployAddressError</a></li><li><a href="MissingContractError.html">MissingContractError</a></li><li><a href="MissingContractNameError.html">MissingContractNameError</a></li><li><a href="MissingExtensionError.html">MissingExtensionError</a></li><li><a href="MissingExtensionNameError.html">MissingExtensionNameError</a></li><li><a href="MissingKeyError.html">MissingKeyError</a></li><li><a href="NotAContractError.html">NotAContractError</a></li><li><a href="NotAnExtensionError.html">NotAnExtensionError</a></li><li><a href="OperationTimedOutError.html">OperationTimedOutError</a></li><li><a href="QR.html">QR</a></li><li><a href="Repository.html">Repository</a></li><li><a href="RepositoryError.html">RepositoryError</a></li><li><a href="RetryProxy.html">RetryProxy</a></li><li><a href="TruffleNetwork.html">TruffleNetwork</a></li><li><a href="Value.html">Value</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="tutorials.list.html" class="dropdown-toggle" data-toggle="dropdown">Tutorials<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="tutorial-index_.html">BidiPass SDK Integration</a></li>
+				</ul>
+			</li>
+			
+		</ul>
+        
+            <div class="col-sm-3 col-md-3">
+                <form class="navbar-form" role="search">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search" name="q" id="search-input">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" id="search-submit"><i class="glyphicon glyphicon-search"></i></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        
+	</div>
+
+</div>
+</div>
+
+
+<div class="container" id="toc-content">
+<div class="row">
+
+	
+	<div class="col-md-12">
+	
+		<div id="main">
+			<section class="tutorial-section">
+
+<header>
+    
+
+    <h2>Add an admin</h2>
+</header>
+
+<article>
+    <h1>Add an admin</h1><p>In order to start working with BidiPass you need to add Admins. 
+This could be done by using the command below:</p>
+<pre class="prettyprint source lang-bash"><code>$(npm bin)/bidipass master admin add \
+  -k '0x3e722ce009e8acbfad73048108d965b6e38c8d2051d4feaef9fe8d867de7f62c'</code></pre><p>Sample Output:</p>
+<pre class="prettyprint source lang-bash"><code>--> Add new admin to provider registry at 0x0AEF63A5F2dFd04a043bCDC1843309e62b694003
+
+{Admin Account}
+Address: 0xd1deFb3b5d591473419b850f3cF37E6cE741a834
+Private Key: 0x3918997b7df8ac725a70e2d012f67d32065b8466485dcbf7794031313b1db540</code></pre><p><strong><a href="tutorial-add-provider.html">NEXT</a></strong></p>
+</article>
+
+</section>
+
+		</div>
+	</div>
+
+	<div class="clearfix"></div>
+
+	
+
+</div>
+</div>
+
+
+    <div class="modal fade" id="searchResults">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Search results</h4>
+          </div>
+          <div class="modal-body"></div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div>
+
+
+<footer>
+
+
+<span class="jsdoc-message">
+	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a>
+	
+		on 2019-03-13T14:56:05+02:00
+	
+	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
+</span>
+</footer>
+
+<script src="scripts/docstrap.lib.js"></script>
+<script src="scripts/toc.js"></script>
+
+    <script type="text/javascript" src="scripts/fulltext-search-ui.js"></script>
+
+
+<script>
+$( function () {
+	$( "[id*='$']" ).each( function () {
+		var $this = $( this );
+
+		$this.attr( "id", $this.attr( "id" ).replace( "$", "__" ) );
+	} );
+
+	$( ".tutorial-section pre, .readme-section pre, pre.prettyprint.source" ).each( function () {
+		var $this = $( this );
+
+		var example = $this.find( "code" );
+		exampleText = example.html();
+		var lang = /{@lang (.*?)}/.exec( exampleText );
+		if ( lang && lang[1] ) {
+			exampleText = exampleText.replace( lang[0], "" );
+			example.html( exampleText );
+			lang = lang[1];
+		} else {
+			var langClassMatch = example.parent()[0].className.match(/lang\-(\S+)/);
+			lang = langClassMatch ? langClassMatch[1] : "javascript";
+		}
+
+		if ( lang ) {
+
+			$this
+			.addClass( "sunlight-highlight-" + lang )
+			.addClass( "linenums" )
+			.html( example.html() );
+
+		}
+	} );
+
+	Sunlight.highlightAll( {
+		lineNumbers : false,
+		showMenu : true,
+		enableDoclinks : true
+	} );
+
+	$.catchAnchorLinks( {
+        navbarOffset: 10
+	} );
+	$( "#toc" ).toc( {
+		anchorName  : function ( i, heading, prefix ) {
+			return $( heading ).attr( "id" ) || ( prefix + i );
+		},
+		selectors   : "#toc-content h1,#toc-content h2,#toc-content h3,#toc-content h4",
+		showAndHide : false,
+		smoothScrolling: true
+	} );
+
+	$( "#main span[id^='toc']" ).addClass( "toc-shim" );
+	$( '.dropdown-toggle' ).dropdown();
+
+    $( "table" ).each( function () {
+      var $this = $( this );
+      $this.addClass('table');
+    } );
+
+} );
+</script>
+
+
+
+<!--Navigation and Symbol Display-->
+
+
+<!--Google Analytics-->
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            SearcherDisplay.init();
+        });
+    </script>
+
+
+</body>
+</html>
