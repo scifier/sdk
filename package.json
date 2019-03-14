@@ -33,7 +33,6 @@
     "filter-object": "3.0.0",
     "flex-contract": "github:AlexanderC/flex-contract",
     "fs-extra": "7.0.1",
-    "http-server": "0.11.1",
     "json-colorizer": "1.1.1",
     "p-retry": "3.0.1",
     "pify": "4.0.1",
