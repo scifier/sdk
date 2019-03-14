@@ -8,7 +8,7 @@
   },
   "scripts": {
     "test": "BIDIPASS_ENV=development $(npm bin)/mocha test --timeout 99999 --ui tdd --slow 1500 --file test/_boot.js",
-    "prepack": "npm run init && npm run docs",
+    "prepack": "npm run init && npm run lint && npm run docs",
     "init": "./bin/sync-blockchain.sh",
     "init-dev": "./bin/redeploy-sync-blockchain.sh",
     "docs": "$(npm bin)/jsdoc -c .jsdoc.js ./bidipass-loader.js",
