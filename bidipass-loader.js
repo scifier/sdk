@@ -1,8 +1,8 @@
+const path = require('path');
 const Container = require('./lib/container');
 const TruffleNetwork = require('./lib/network/truffle-network');
 const Repository = require('./lib/contracts/repository');
 const BidiPass = require('./lib/bidipass');
-const path = require('path');
 const debug = require('./lib/utils/debug')(__filename);
 
 function relativePath(p) {
@@ -13,12 +13,12 @@ function relativePath(p) {
  * Create an instance of BidiPass
  * @param {string} providerId
  * @param {string} accountKey
- * 
+ *
  * @todo create an external mapping for .env variables
  */
 module.exports = async (providerId, accountKey) => {
   const container = Container.fromEnv(__dirname);
-  
+
   const truffleConfigFile = relativePath(container.readOrThrow('TRUFFLE_CONFIG'));
   const networkId = container.read('BIDIPASS_ENV', container.readOrThrow('NETWORK_ID'));
   const artifactsDir = relativePath(container.readOrThrow('ARTIFACTS'));
@@ -33,7 +33,7 @@ module.exports = async (providerId, accountKey) => {
   const repository = await Repository.createWithArtifacts(
     network,
     artifactsDir,
-    accountKey
+    accountKey,
   );
 
   const extensions = container.readOrThrow('EXTENSIONS');
