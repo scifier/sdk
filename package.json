@@ -1,6 +1,6 @@
 {
   "name": "@bidipass/sdk",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "BidiPass SDK",
   "main": "bidipass-loader.js",
   "bin": {
@@ -21,7 +21,7 @@
     "bc"
   ],
   "author": "AlexanderC <alexander.cucer@titanium-soft.com>",
-  "license": "ISC",
+  "license": "Apache-2.0",
   "dependencies": {
     "base64-stream": "1.0.0",
     "chalk": "2.4.2",
