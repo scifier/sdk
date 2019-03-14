@@ -9,22 +9,17 @@ This repository contains BidiPass NodeJS SDK.
 ## Prerequisites
 
 - [ ] `Node.JS` >=v8
-- [ ] `ganache-cli` *(for development only)*
-- [ ] `truffle` *(for development only)*
+- [ ] `ganache-cli` *(development only)*
+- [ ] `truffle` *(development only)*
 
 ## Installation:
+
   - `npm install @bidipass/sdk`
 
 ## Documentation
 
-Run Documentation Server:
-  - `$(npm bin)/bidipass docs`
-
-Links:
-  - [Home](http://127.0.0.1:8080)
-  - [SDK Integration](http://127.0.0.1:8080/tutorial-index_.html)
-
-> You can view docs *only when documentation server is running*
+  - [Home](https://bidipasscompany.github.io/sdk/)
+  - [SDK Integration](https://bidipasscompany.github.io/sdk/tutorial-index_.html)
 
 ## Command Line Tool
 
@@ -37,7 +32,6 @@ bidipass <command>
 
 Commands:
   bidipass admin <command>     Manage admins
-  bidipass docs                Start documentation server
   bidipass fake-identity       Fake an identity
   bidipass generate-account    Generate new blockchain account
   bidipass info                Show distribution information
