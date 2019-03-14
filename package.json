@@ -51,6 +51,7 @@
     "speakeasy": "2.0.0",
     "stream-to-promise": "2.2.0",
     "web3": "1.0.0-beta.43",
+    "web3-eth-abi": "1.0.0-beta.43",
     "web3-utils": "1.0.0-beta.43",
     "yargs": "12.0.5"
   },
