@@ -5,10 +5,10 @@ module.exports = {
     ],
     "opts": {
         "encoding": "utf8",
-        "destination": "api-docs/",
+        "destination": "docs/",
         "recurse": true,
         "readme": "README.md",
-        "tutorials": "docs/",
+        "tutorials": "tutorials/",
         "template": "node_modules/ink-docstrap/template"
     },
     "recurseDepth": 10,

@@ -26,7 +26,7 @@ exports.handler = async argv => {
 
   const server = httpServer.createServer({
     cors: true,
-    root: path.resolve(__dirname, '../../api-docs'),
+    root: path.resolve(__dirname, '../../docs'),
   });
 
   server.listen(port, host, () => {
