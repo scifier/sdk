@@ -1,5 +1,3 @@
-# Connect an Identity to a Provider
-
 In order to connect an Identity you have to create the provider and add a manager account.
 To proceed with connecting an identity follow the steps below:
 

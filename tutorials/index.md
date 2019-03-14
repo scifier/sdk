@@ -1,6 +1,4 @@
-# BidiPass SDK Integration
-
-This document provides an example of end-to-end BidiPass SDK integration.
+This section contains the in depth tutorial of an end-to-end BidiPass SDK integration.
 
 ## Table of Content
 

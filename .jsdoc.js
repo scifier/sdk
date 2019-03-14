@@ -25,14 +25,15 @@ module.exports = {
         ]
     },
     "templates": {
+        "logoFile": "https://bidipass.org/img/logo.png",
         "cleverLinks": false,
         "monospaceLinks": false,
         "copyright": "© 2018, BidiPass LTD",
         "footer": "<span class='jsdoc-message'>BidiPass. Bringing Security to All Digital Transactions. BidiPass is an identity authentication protocol designed to strengthen today’s KYC model that global businesses depend on.</span>",
-        "systemName": "BidiPass SDK",
+        "systemName": " ",
         "navType": "inline",
-        "linenums": true,
-        "theme": "cosmo",
+        "linenums": false,
+        "theme": "paper",
         "default": {
             "outputSourceFiles": true
         }

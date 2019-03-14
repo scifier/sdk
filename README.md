@@ -12,7 +12,7 @@ This repository contains BidiPass NodeJS SDK.
 - [ ] `ganache-cli` *(development only)*
 - [ ] `truffle` *(development only)*
 
-## Installation:
+## Installation
 
   - `npm install @bidipass/sdk`
 

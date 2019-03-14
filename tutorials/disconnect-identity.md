@@ -1,5 +1,3 @@
-# Disconnect an Identity from a Provider
-
 In order to disconnect an Identity you have be connected to the desired platform.
 To proceed with disconnecting an identity follow the steps below:
 

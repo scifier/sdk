@@ -1,5 +1,3 @@
-# Add an admin
-
 In order to start working with BidiPass you need to add Admins. 
 This could be done by using the command below:
 

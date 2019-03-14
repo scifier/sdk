@@ -1,5 +1,3 @@
-# Authorize an Action
-
 In order to proceed to action authorization you need to connect the Identity to the provider.
 To proceed with connecting an identity follow the steps below:
 

@@ -1,5 +1,3 @@
-# List Requests
-
 In order to list Authorization Requests you have to create the provider and add a manager account.
 To proceed with listing the requests follow the steps below:
 

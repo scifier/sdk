@@ -1,5 +1,3 @@
-# Add a Provider
-
 In order to add a provider and make possible managing it, please follow the steps below:
 
 1. Add provider to the blockchain
