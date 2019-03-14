@@ -7,10 +7,12 @@ const path = require('path');
 const fs = require('fs');
 
 const artifactsDir = path.resolve(__dirname, '../artifacts');
+const originalTruffleConfigFile = path.join(artifactsDir, 'truffle.js');
+const truffleConfigFile = path.join(artifactsDir, 'truffle.json');
 
 console.info(`Cleanup artifacts from ${ artifactsDir }`);
 
-const artifacts = fs.readdirSync(artifactsDir);
+const artifacts = fs.readdirSync(artifactsDir).filter(f => /\.json$/.test(f));
 
 for (const file of artifacts) {
   const artifactFile = path.join(artifactsDir, file);
@@ -32,4 +34,13 @@ for (const file of artifacts) {
   console.info(`Cleanup ${ artifactFile }`);
 
   fs.writeFileSync(artifactFile, JSON.stringify(content, null, '  '));
+}
+
+if (fs.existsSync(originalTruffleConfigFile)) {
+  console.info(`Optimize Truffle config ${ originalTruffleConfigFile }`);
+
+  const truffleConfig = require(originalTruffleConfigFile);
+
+  fs.writeFileSync(truffleConfigFile, JSON.stringify(truffleConfig, null, '  '));
+  fs.unlinkSync(originalTruffleConfigFile);
 }

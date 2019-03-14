@@ -69,5 +69,5 @@ Release:
   - `npm run docs`
   - `npm pack` or `npm publish`
 
-> `npm run init` synchronizes network configuration file (`blockchain/truffle.js`), which contains default network setup used by clients. 
+> `npm run init` synchronizes network configuration file (`blockchain/truffle.json`), which contains default network setup used by clients. 
 > **Be very careful with this as it is being used in production!**

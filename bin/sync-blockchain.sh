@@ -16,5 +16,5 @@ fi
 
 rm -rf artifacts/
 cp -R "$CONTRACTS_DIR/" artifacts/
-./bin/cleanup-artifacts.js
 cp "$TRUFFLE_CONFIG" artifacts/truffle.js
+./bin/cleanup-artifacts.js

@@ -1,0 +1,38 @@
+{
+  "solc": {
+    "optimizer": {
+      "enabled": true,
+      "runs": 200
+    }
+  },
+  "networks": {
+    "development": {
+      "host": "127.0.0.1",
+      "port": 8545,
+      "network_id": "*",
+      "gasPrice": 0,
+      "protocol": "http"
+    },
+    "testing": {
+      "protocol": "http",
+      "host": "192.168.1.28",
+      "port": 8902,
+      "network_id": "346965197",
+      "gasPrice": 0
+    },
+    "stage": {
+      "protocol": "http",
+      "host": "52.71.173.249",
+      "port": 8902,
+      "network_id": "346965197",
+      "gasPrice": 0
+    },
+    "live": {
+      "protocol": "http",
+      "host": "13.52.49.229",
+      "port": 8902,
+      "network_id": "346965197",
+      "gasPrice": 0
+    }
+  }
+}
