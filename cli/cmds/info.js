@@ -49,6 +49,11 @@ exports.handler = async argv => {
   );
 
   console.log(
+    chalk.green('BidiPassUtilityToken:'),
+    sdk.repository.api('BidiPassUtilityToken').address
+  );
+
+  console.log(
     chalk.green('RewardRegistry:'),
     (await sdk.repository.api('PlatformRegistry').rewardRegistry()).address
   );
