@@ -13,14 +13,17 @@ function relativePath(p) {
  * Create an instance of BidiPass
  * @param {string} providerId
  * @param {string} accountKey
+ * @param {string} networkType mainnet | testnet
  *
  * @todo create an external mapping for .env variables
  */
-module.exports = async (providerId, accountKey) => {
+module.exports = async (providerId, accountKey, networkType) => {
   const container = Container.fromEnv(__dirname);
 
   const truffleConfigFile = relativePath(container.readOrThrow('TRUFFLE_CONFIG'));
-  const networkId = container.read('BIDIPASS_ENV', container.readOrThrow('NETWORK_ID'));
+  const networkId = (networkType === 'testnet')
+    ? 'us-west-2-test'
+    : container.read('BIDIPASS_ENV', container.readOrThrow('NETWORK_ID'));
   const artifactsDir = relativePath(container.readOrThrow('ARTIFACTS'));
 
   debug('providerId', providerId);
