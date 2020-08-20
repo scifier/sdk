@@ -21,6 +21,9 @@
     },
     "disconnect-identity": {
       "title": "Disconnect an Identity from a provider"
+    },
+    "use-bidipass-testnet": {
+      "title": "Use BidiPass testnet blockchain"
     }
   }
 }

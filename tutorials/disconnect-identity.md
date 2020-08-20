@@ -26,3 +26,5 @@ const user = request.$bidiPassIdentity;
 ```javascript
 await sdk.identity.unwhitelist(user);
 ```
+
+**[NEXT](use-bidipass-testnet.html)**
