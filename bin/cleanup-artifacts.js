@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const ALLOWED_CONTRACTS = [ /^(authorization|platform|reward|bdp)/i ];
+const ALLOWED_CONTRACTS = [ /^(authorization|platform|reward|bdp|bidipass)/i ];
 const ALLOWED_KEYS = [ 'abi', 'contractName', 'networks' ];
 
 const path = require('path');

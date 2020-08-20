@@ -10,6 +10,7 @@ This section contains the in depth tutorial of an end-to-end BidiPass SDK integr
   - `(SDK)` [Authorize an Action](tutorial-authorize-action.html)
   - `(SDK)` [List Authorization Requests](tutorial-list-requests.html)
   - `(SDK)` [Disconnect an Identity from a provider](tutorial-disconnect-identity.html)
+  - `(SDK)` [Use BidiPass testnet blockchain](use-bidipass-testnet.html)
 
 > There are other commands and functionality available.
 > Please use `--help` for BidiPass CLI tool and consult API docs for SDKs.

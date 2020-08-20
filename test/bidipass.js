@@ -31,6 +31,7 @@ suite('BidiPass', async function() {
       'Platform',
       'PlatformRegistry',
       'RewardRegistry',
+      'BidiPassUtilityToken',
     ]);
   });
 });

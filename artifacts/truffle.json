@@ -9,7 +9,7 @@
     "development": {
       "host": "127.0.0.1",
       "port": 8545,
-      "network_id": "*",
+      "network_id": "123456789",
       "gasPrice": 0,
       "protocol": "http"
     },
@@ -18,6 +18,13 @@
       "host": "192.168.1.28",
       "port": 8902,
       "network_id": "346965197",
+      "gasPrice": 0
+    },
+    "us-west-2-test": {
+      "protocol": "http",
+      "host": "52.32.114.237",
+      "port": 8902,
+      "network_id": "346965198",
       "gasPrice": 0
     },
     "stage": {

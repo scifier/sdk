@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
-	<title>  Tutorial: List Authorization Requests</title>
+	<title>  Tutorial: Use BidiPass testnet blockchain</title>
 
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -76,39 +76,16 @@
 <header>
     
 
-    <h2>List Authorization Requests</h2>
+    <h2>Use BidiPass testnet blockchain</h2>
 </header>
 
 <article>
-    <p>In order to list Authorization Requests you have to create the provider and add a manager account.
-To proceed with listing the requests follow the steps below:</p>
-<ol>
-<li>Connect and initialize BidiPass SDK</li>
-</ol>
+    <p>In order to proceed to connect to BidiPass testnet blockchain you need to pass an additional parameter:</p>
 <pre class="prettyprint source lang-javascript"><code>const PROVIDER_ID = 'provider1';
 const ACCOUNT_KEY = '0x5689fa7c97a8f8cf10975f6f453472f09e9c9928ac81799128fcb3da68773cf0'; // {Manager Account} credentials
 
 const bidipass = require('@bidipass/sdk'); // or require('./sdk/bidipass-loader.js');
-const sdk = await bidipass(PROVIDER_ID, ACCOUNT_KEY);</code></pre><ol start="2">
-<li>Restore the Identity from it's representation (e.g. <code>identityRepr</code> stored in DB)</li>
-</ol>
-<pre class="prettyprint source lang-javascript"><code>const user = sdk.identity.restore(identityRepr);</code></pre><ol start="3">
-<li>Get total requests (optional)</li>
-</ol>
-<pre class="prettyprint source lang-javascript"><code>const totalRequests = await sdk.action.total(user);</code></pre><ol start="4">
-<li>Perform listing</li>
-</ol>
-<pre class="prettyprint source lang-javascript"><code>const requests = await sdk.action.list(user);
-// ...do something with requests array
-
-// Retrieve next batch of requests
-if (!requests.isIncomplete) {
-  const nextRequests = await sdk.action.list(
-    user,
-    requests.offsetItem
-    /* items = 10 */
-  );
-}</code></pre><p><strong><a href="tutorial-disconnect-identity.html">NEXT</a></strong></p>
+const sdk = await bidipass(PROVIDER_ID, ACCOUNT_KEY, 'testnet');</code></pre>
 </article>
 
 </section>

@@ -14,7 +14,12 @@ This repository contains BidiPass NodeJS SDK.
 
 ## Installation
 
-  - `npm install @bidipass/sdk`
+```bash
+  npm install @bidipass/sdk
+
+  # or install it globally
+  npm install -g @bidipass/sdk
+```
 
 ## Documentation
 
@@ -24,7 +29,17 @@ This repository contains BidiPass NodeJS SDK.
 ## Command Line Tool
 
 Usage:
-  - `$(npm bin)/bidipass --help`
+
+```bash
+  $(npm bin)/bidipass --help
+
+  # bidipass testnet
+  $(npm bin)/bidipass-testnet --help
+
+  # globally installed
+  bidipass --help
+  bidipass-testnet --help
+```
 
 ```bash
 alexanderc@MacBook-Pro:~/Desktop/Projects/exchange$ $(npm bin)/bidipass --help
