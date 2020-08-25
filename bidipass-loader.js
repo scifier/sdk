@@ -21,7 +21,7 @@ module.exports = async (providerId, accountKey, networkType) => {
   const container = Container.fromEnv(__dirname);
 
   const truffleConfigFile = relativePath(container.readOrThrow('TRUFFLE_CONFIG'));
-  const networkId = (networkType === 'testnet')
+  const networkId = /^test(net)?$/i.test(networkType)
     ? 'us-west-2-test'
     : container.read('BIDIPASS_ENV', container.readOrThrow('NETWORK_ID'));
   const artifactsDir = relativePath(container.readOrThrow('ARTIFACTS'));
